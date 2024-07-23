@@ -2,9 +2,16 @@ import requests
 import time
 from requests_oauthlib import OAuth2Session
 
-# Set up your Spotify API credentials
-client_id = 'ad7f25142d414884913dd1483e4d7f61'
-client_secret = 'efd29132685b43a38dae11cafff6a7a7'
+# importing os module for environment variables
+import os
+# importing necessary functions from dotenv library
+from dotenv import load_dotenv, dotenv_values 
+# loading variables from .env file
+load_dotenv() 
+
+client_id = os.getenv('CLIENT_ID')
+client_secret = os.getenv('CLIENT_SECRET')
+
 redirect_uri = 'https://localhost:8000/callback'  # Replace with your own redirect URI
 
 # Set up OAuth session
