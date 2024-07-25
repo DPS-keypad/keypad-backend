@@ -1,0 +1,47 @@
+{
+  "keys": {
+    "keyboard": [
+      {
+        "id": "keyboard_cut",
+        "description": "Cut",
+        "key": "ctrl+x"
+      },
+      {
+        "id": "keyboard_copy",
+        "description": "Copy",
+        "key": "ctrl+c"
+      },
+      {
+        "id": "keyboard_paste",
+        "description": "Paste",
+        "key": "ctrl+v"
+      }
+    ],
+    "spotify": [
+      {
+        "id": "spotify_play",
+        "description": "Play/Pause"
+      },
+      {
+        "id": "spotify_next",
+        "description": "Next"
+      },
+      {
+        "id": "spotify_previous",
+        "description": "Previous"
+      }
+    ]
+  },
+  "pots": {
+    "system": [
+      {
+        "id": "system_volume",
+        "description": "Volume"
+      },
+      {
+        "id": "system_brightness",
+        "description": "Brightness"
+      }
+    ]
+  }
+}
