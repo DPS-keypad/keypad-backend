@@ -1,16 +1,8 @@
+"""
 import requests
 import time
 
-"""
 from requests_oauthlib import OAuth2Session
-import threading
-import app.controllers.backendServerController as server
-import app.controllers.serialController as serialController
-
-serial = serialController.SerialController()
-
-# Start the serial communication in a separate thread
-threading.Thread(target=serial.listen).start()
 
 # Get authorization URL
 authorization_url, state = oauth.authorization_url('https://accounts.spotify.com/authorize')
@@ -50,19 +42,14 @@ while True:
     time.sleep(5)  # Adjust the sleep duration as needed
 """
 
-import serial
-from app.utils.constants import *
 import threading
-import keyboard
+import app.controllers.backendServerController as server
+import app.controllers.serialController as serialController
 
-ser = serial.Serial(port=SERIAL_PORT, baudrate=BAUDRATE, bytesize=BYTESIZE, parity=PARITY, stopbits=STOPBITS,
-                    timeout=TIMEOUT)
-while True:
-    if ser.in_waiting > 0:
-        rx_char = ser.read().decode('utf-8')
-        print(rx_char)
-        if rx_char == 'a':
-            keyboard.press('ctrl+v')
+serial = serialController.SerialController()
+
+# Start the serial communication in a separate thread
+threading.Thread(target=serial.listen).start()
 
 # Start the Flask server in the main thread
 server.listen()
