@@ -52,3 +52,13 @@ def set_action(key, action):
             keyboard_actions[key] = action
             with open(KEYBOARD_ACTIONS_LIST_PATH, 'w') as file:
                 file.write(json.dumps(keyboard_actions))
+
+
+def change_values_pot(string_values):
+    """
+    This function will execute the action corresponding to the potentiometers values.
+    """
+    # Split the string into individual values: the string is actually made of 3 characters, each indicating the 3 values o 8 bits, so must be first converted into integers
+    # for example the character 'a' is 97 in ASCII, so the value is 97.
+    values = [ord(char) for char in string_values]
+    return None
