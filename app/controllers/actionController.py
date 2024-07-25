@@ -12,6 +12,7 @@ def execute_action(key):
     received from the keypad.
     """
     action_string = actionService.get_action(key)
+    print(f"Action for key {key}: {action_string}")
     # Execute the action
     if action_string:
         actionService.execute_action_string(action_string)

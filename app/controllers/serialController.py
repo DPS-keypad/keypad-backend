@@ -33,7 +33,7 @@ class SerialController:
         print("Listening for incoming data...")
         while True:
             if self.has_received():
-                pressed_key = self.read_char()  # or read_string() if you are sending strings
+                pressed_key = self.read_string()  # read_char() if single character or read_string() if you are strings
                 print(f"Received key: {pressed_key}")
                 # Execute the action in a separate thread
                 threading.Thread(target=actionController.execute_action, args=(pressed_key,)).start()
@@ -45,7 +45,7 @@ class SerialController:
     def read_string(self):
         # Reads a string from the serial port
         # Reads until a newline character is encountered or until 40 characters are read
-        return self.ser.read_until(expected=b'\0', size=40).decode('utf-8')
+        return self.ser.read_until(expected=b'\0', size=40).decode('utf-8').removesuffix('\0')
 
     def has_received(self):
         # Check if there is data available to read
