@@ -2,7 +2,6 @@ from flask import Flask, jsonify, request
 import actionController
 
 app = Flask(__name__)
-actionController = actionController.ActionController()
 
 
 @app.route('/api', methods=['GET'])

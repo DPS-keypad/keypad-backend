@@ -2,7 +2,7 @@ import serial
 import threading
 
 from app.utils.constants import *
-import app.controllers.actionController as actionController
+import actionController
 
 
 class SerialController:
@@ -18,7 +18,6 @@ class SerialController:
         # Initialize the serial connection
         self.ser = serial.Serial(port=self.port, baudrate=self.baudrate, bytesize=self.bytesize, stopbits=self.stopbit,
                                  parity=self.parity, timeout=self.timeout)
-        self.action = actionController.ActionController()
 
     def listen(self):
         # Starts the serial connection and listens for incoming data
@@ -33,7 +32,7 @@ class SerialController:
             if self.has_received():
                 pressed_key = self.read_char()  # or read_string() if you are sending strings
                 # Execute the action in a separate thread
-                threading.Thread(target=self.action.execute_action, args=(pressed_key,)).start()
+                threading.Thread(target=actionController.execute_action, args=(pressed_key,)).start()
 
     def read_char(self):
         # Reads a single character from the serial port
