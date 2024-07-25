@@ -16,7 +16,7 @@ def execute_action_string(action_string):
     # the first part of the action_string is the API name, and the rest is the specific function to call in that API
     api_string, function_string = action_string.split('_')
     # import the API file
-    api = importlib.import_module(f'app.services.api.{api_string}')
+    api = importlib.import_module(f'app.services.api.{api_string}_api')
     # get the function to call
     function = getattr(api, function_string)
     # call the function, execute the action

@@ -2,7 +2,7 @@ import serial
 import threading
 
 from app.utils.constants import *
-import actionController
+import app.controllers.actionController as actionController
 
 
 class SerialController:
@@ -21,16 +21,20 @@ class SerialController:
 
     def listen(self):
         # Starts the serial connection and listens for incoming data
+        """
         try:
             self.ser.open()
         except serial.SerialException as e:
             print(f"Error opening serial port: {e}")
             return
+        """
 
         # Infinite loop to listen for incoming data
+        print("Listening for incoming data...")
         while True:
             if self.has_received():
                 pressed_key = self.read_char()  # or read_string() if you are sending strings
+                print(f"Received key: {pressed_key}")
                 # Execute the action in a separate thread
                 threading.Thread(target=actionController.execute_action, args=(pressed_key,)).start()
 
@@ -46,3 +50,4 @@ class SerialController:
     def has_received(self):
         # Check if there is data available to read
         return self.ser.in_waiting > 0
+

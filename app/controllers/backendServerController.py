@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-import actionController
+import app.controllers.actionController as actionController
 
 app = Flask(__name__)
 
