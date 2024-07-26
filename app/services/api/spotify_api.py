@@ -17,10 +17,12 @@ print(f'Please visit the following URL to authorize the application: {authorizat
 authorization_code = input('Enter the authorization code from the redirect URI: ')
 
 # Fetch access token using the authorization code
-token = oauth.fetch_token('https://accounts.spotify.com/api/token', authorization_response=authorization_code, client_secret=client_secret)
+token = oauth.fetch_token('https://accounts.spotify.com/api/token', authorization_response=authorization_code,
+                          client_secret=client_secret)
 
 # Get the access token from the token response
 access_token = token['access_token']
+
 
 def get_authorization_url():
     """
@@ -30,6 +32,7 @@ def get_authorization_url():
     authorization_url, state = oauth.authorization_url(AUTH_URL)
     return authorization_url, state
 
+
 def fetch_access_token(client_secret, authorization_code):
     """
     Fetch the access token using the authorization code.
@@ -37,6 +40,7 @@ def fetch_access_token(client_secret, authorization_code):
     oauth = OAuth2Session(client_id, redirect_uri=redirect_uri)
     token = oauth.fetch_token(TOKEN_URL, authorization_response=authorization_code, client_secret=client_secret)
     return token['access_token']
+
 
 def get_currently_playing_track(access_token):
     """
@@ -52,6 +56,7 @@ def get_currently_playing_track(access_token):
         return track_name, artist_name
     return None, None
 
+
 def play(access_token):
     """
     Play the currently paused track.
@@ -62,6 +67,7 @@ def play(access_token):
         print('Playback started.')
     else:
         print('Failed to start playback.')
+
 
 def pause(access_token):
     """
@@ -74,6 +80,7 @@ def pause(access_token):
     else:
         print('Failed to pause playback.')
 
+
 def next(access_token):
     """
     Skip to the next track.
@@ -84,6 +91,7 @@ def next(access_token):
         print('Skipped to next track.')
     else:
         print('Failed to skip to next track.')
+
 
 def previous(access_token):
     """
@@ -96,6 +104,7 @@ def previous(access_token):
     else:
         print('Failed to skip to previous track.')
 
+
 def get_devices(access_token):
     """
     Get the list of available devices.
@@ -106,3 +115,19 @@ def get_devices(access_token):
         devices = response.json()['devices']
         return devices
     return []
+
+
+"""
+
+music = "Ciao"
+
+
+def get_music():
+    global music
+    return music
+
+
+def set_music(music_new):
+    global music
+    music = music_new
+"""
