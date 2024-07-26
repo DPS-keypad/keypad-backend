@@ -50,4 +50,3 @@ class SerialController:
     def has_received(self):
         # Check if there is data available to read
         return self.ser.in_waiting > 0
-

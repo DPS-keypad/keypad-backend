@@ -106,5 +106,3 @@ def get_devices(access_token):
         devices = response.json()['devices']
         return devices
     return []
-
-

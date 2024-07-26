@@ -5,6 +5,7 @@ PARITY = 'N'
 STOPBITS = 1
 TIMEOUT = 1
 
+"""
 # Keyboard constants
 KEY1 = 'a'
 KEY2 = 'b'
@@ -18,18 +19,14 @@ KEY9 = 'i'
 POT1 = 'j'
 POT2 = 'k'
 POT3 = 'l'
+"""
 
 # paths
 KEYBOARD_ACTIONS_LIST_PATH = 'app/models/keyboardActionsList.json'
 ALL_ACTIONS_LIST_PATH = 'app/models/allActionsList.json'
 
-from os import environ as env
-
-
 SECRET_KEY = 'your_secret_key'
 DEBUG = True
-
-
 
 # SPOTIFY API
 # Constants for the Spotify API
@@ -44,8 +41,6 @@ VOLUME_URL = 'https://api.spotify.com/v1/me/player/volume'
 DEVICES_URL = 'https://api.spotify.com/v1/me/player/devices'
 SEARCH_URL = 'https://api.spotify.com/v1/search'
 TRANSFER_PLAYBACK_URL = 'https://api.spotify.com/v1/me/player'
-
-
 
 # SYSTEM API
 # Define constants for volume & mouse control
