@@ -131,21 +131,4 @@ def playback(access_token, device_id):
     else:
         print('Failed to transfer playback.')
 
-def search(access_token, query):
-    """
-    Search for a track on Spotify.
-    """
-    headers = {'Authorization': f'Bearer {access_token}'}
-    params = {'q': query, 'type': 'track'}
-    response = requests.get(SEARCH_URL, headers=headers, params=params)
-    if response.status_code == 200:
-        tracks = response.json()['tracks']['items']
-        return [(track['name'], track['artists'][0]['name'], track['id']) for track in tracks]
-    return []
 
-# Example of using one of the functions
-track_name, artist_name = get_currently_playing_track(access_token)
-if track_name and artist_name:
-    print(f'Currently playing: {track_name} by {artist_name}')
-else:
-    print('No track currently playing.')
