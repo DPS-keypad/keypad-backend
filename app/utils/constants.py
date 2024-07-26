@@ -1,5 +1,5 @@
 # Serial constants
-SERIAL_PORT = 'COM6'
+SERIAL_PORT = 'COM3'
 BAUDRATE = 115200
 BYTESIZE = 8
 PARITY = 'N'
@@ -29,3 +29,12 @@ from os import environ as env
 
 SECRET_KEY = 'your_secret_key'
 DEBUG = True
+
+
+# Define constants for volume control
+VOLUME_MIN = 0
+VOLUME_MAX = 65535
+
+# Define constants for mouse control
+MOUSEEVENTF_WHEEL = 0x0800
+MOUSEEVENTF_HWHEEL = 0x01000

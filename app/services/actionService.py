@@ -13,6 +13,7 @@ class ActionService:
     def __init__(self):
         self.pot_values = [0, 0, 0]
 
+
     def execute_action_key(self, action_string):
         """
         This function will execute the action corresponding to the action_string string.
@@ -25,6 +26,8 @@ class ActionService:
         function = getattr(api, function_string)
         # call the function, execute the action
         function()
+
+
 
     def get_action(self, key):
         """
@@ -53,6 +56,8 @@ class ActionService:
                 keyboard_actions[key] = action
                 with open(KEYBOARD_ACTIONS_LIST_PATH, 'w') as file:
                     file.write(json.dumps(keyboard_actions))
+
+
 
     def execute_action_pot(self, action_strings, values):
         """

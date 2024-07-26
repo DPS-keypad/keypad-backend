@@ -8,7 +8,7 @@
   "key7": "keyboard_cut",
   "key8": "keyboard_copy",
   "key9": "keyboard_paste",
-  "pot1": "system_volume",
-  "pot2": "system_brightness",
+  "pot1": "system_scrollX",
+  "pot2": "system_scrollY",
   "pot3": null
 }
