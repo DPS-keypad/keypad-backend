@@ -4,7 +4,7 @@ import app.controllers.actionController as actionController
 app = Flask(__name__)
 
 
-@app.route('/api', methods=['GET'])
+@app.route('/api_list', methods=['GET'])
 def get_api_list():
     """
     This function is called when a GET request is made to the /data endpoint.
@@ -16,7 +16,7 @@ def get_api_list():
     return jsonify({"data": api_list}), 200
 
 
-@app.route('/data', methods=['POST'])
+@app.route('/set_api', methods=['POST'])
 def data():
     data = request.json
     key = data['key']
