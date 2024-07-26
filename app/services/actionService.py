@@ -9,56 +9,68 @@ from app.utils.constants import *
 file_lock = threading.Lock()
 
 
-def execute_action_string(action_string):
-    """
-    This function will execute the action corresponding to the action_string string.
-    """
-    # the first part of the action_string is the API name, and the rest is the specific function to call in that API
-    api_string, function_string = action_string.split('_')
-    # import the API file
-    api = importlib.import_module(f'app.services.api.{api_string}_api')
-    # get the function to call
-    function = getattr(api, function_string)
-    # call the function, execute the action
-    function()
+class ActionService:
+    def __init__(self):
+        self.pot_values = [0, 0, 0]
 
+    def execute_action_key(self, action_string):
+        """
+        This function will execute the action corresponding to the action_string string.
+        """
+        # the first part of the action_string is the API name, and the rest is the specific function to call in that API
+        api_string, function_string = action_string.split('_')
+        # import the API file
+        api = importlib.import_module(f'app.services.api.{api_string}_api')
+        # get the function to call
+        function = getattr(api, function_string)
+        # call the function, execute the action
+        function()
 
-def get_action(key):
-    """
-    This function will return the action corresponding to the key pressed on the keypad.
-    """
-    with file_lock:
-        keyboard_actions = json.load(open(KEYBOARD_ACTIONS_LIST_PATH))
-        if key in keyboard_actions:
-            return keyboard_actions[key]
-        return None
+    def get_action(self, key):
+        """
+        This function will return the action corresponding to the key pressed on the keypad.
+        """
+        with file_lock:
+            keyboard_actions = json.load(open(KEYBOARD_ACTIONS_LIST_PATH))
+            if key in keyboard_actions:
+                return keyboard_actions[key]
+            return None
 
+    def get_action_list(self):
+        """
+        This function will return all the actions available in the system.
+        """
+        with file_lock:
+            return json.load(open(ALL_ACTIONS_LIST_PATH))
 
-def get_action_list():
-    """
-    This function will return all the actions available in the system.
-    """
-    with file_lock:
-        return json.load(open(ALL_ACTIONS_LIST_PATH))
+    def set_action(self, key, action):
+        """
+        This function will set the action corresponding to the key pressed on the keypad
+        """
+        with file_lock:
+            keyboard_actions = json.load(open(KEYBOARD_ACTIONS_LIST_PATH))
+            if key in keyboard_actions:
+                keyboard_actions[key] = action
+                with open(KEYBOARD_ACTIONS_LIST_PATH, 'w') as file:
+                    file.write(json.dumps(keyboard_actions))
 
-
-def set_action(key, action):
-    """
-    This function will set the action corresponding to the key pressed on the keypad
-    """
-    with file_lock:
-        keyboard_actions = json.load(open(KEYBOARD_ACTIONS_LIST_PATH))
-        if key in keyboard_actions:
-            keyboard_actions[key] = action
-            with open(KEYBOARD_ACTIONS_LIST_PATH, 'w') as file:
-                file.write(json.dumps(keyboard_actions))
-
-
-def change_values_pot(string_values):
-    """
-    This function will execute the action corresponding to the potentiometers values.
-    """
-    # Split the string into individual values: the string is actually made of 3 characters, each indicating the 3 values o 8 bits, so must be first converted into integers
-    # for example the character 'a' is 97 in ASCII, so the value is 97.
-    values = [ord(char) for char in string_values]
-    return None
+    def execute_action_pot(self, action_strings, values):
+        """
+        This function will execute the action corresponding to the potentiometers values.
+        """
+        for index in range(3):
+            # The value is a character of 8 bits, so must be first converted into integer
+            # for example the character 'a' is 97 in ASCII, so the value is 97.
+            int_value = ord(values[index])
+            if int_value != self.pot_values[index] and action_strings[index]:
+                # Update the value of the potentiometer
+                self.pot_values[index] = int_value
+                # Execute the action
+                # The first part of the action_string is the API name, and the rest is the specific function to call in that API
+                api_string, function_string = action_strings[index].split('_')
+                # import the API file
+                api = importlib.import_module(f'app.services.api.{api_string}_api')
+                # get the function to call
+                function = getattr(api, function_string)
+                # call the function, execute the action
+                function(int_value)

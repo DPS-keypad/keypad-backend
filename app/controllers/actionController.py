@@ -5,6 +5,8 @@ This methods will be called by the backendServerController to fetch the API list
 receiving commands from the keypad to execute the corresponding action.
 """
 
+actionService = actionService.ActionService()
+
 
 def execute_action(received_string):
     """
@@ -14,13 +16,21 @@ def execute_action(received_string):
     if received_string.startswith("p"):
         # it's potentiometers values
         # removes the first letter of the string
-        actionService.change_values_pot(received_string[1:])
+        values = received_string[1:]
+        action_strings = [actionService.get_action("pot" + str(value)) for value in range(1, 4)]
+        print(f"Actions for potentiometers values: {action_strings}")
+        # Execute the actions
+        if action_strings:
+            actionService.execute_action_pot(action_strings, values)
+        else:
+            print("No action set for this potentiometer")
+
     elif received_string.startswith("k"):
         action_string = actionService.get_action(received_string)
         print(f"Action for key {received_string}: {action_string}")
         # Execute the action
         if action_string:
-            actionService.execute_action_string(action_string)
+            actionService.execute_action_key(action_string)
         else:
             print("No action set for this key.")
     else:
