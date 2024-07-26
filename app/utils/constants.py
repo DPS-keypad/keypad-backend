@@ -31,7 +31,25 @@ SECRET_KEY = 'your_secret_key'
 DEBUG = True
 
 
-# Define constants for volume control
+
+# SPOTIFY API
+# Constants for the Spotify API
+AUTH_URL = 'https://accounts.spotify.com/authorize'
+TOKEN_URL = 'https://accounts.spotify.com/api/token'
+CURRENTLY_PLAYING_URL = 'https://api.spotify.com/v1/me/player/currently-playing'
+PLAY_URL = 'https://api.spotify.com/v1/me/player/play'
+PAUSE_URL = 'https://api.spotify.com/v1/me/player/pause'
+NEXT_TRACK_URL = 'https://api.spotify.com/v1/me/player/next'
+PREVIOUS_TRACK_URL = 'https://api.spotify.com/v1/me/player/previous'
+VOLUME_URL = 'https://api.spotify.com/v1/me/player/volume'
+DEVICES_URL = 'https://api.spotify.com/v1/me/player/devices'
+SEARCH_URL = 'https://api.spotify.com/v1/search'
+TRANSFER_PLAYBACK_URL = 'https://api.spotify.com/v1/me/player'
+
+
+
+# SYSTEM API
+# Define constants for volume & mouse control
 VOLUME_MIN = 0
 VOLUME_MAX = 65535
 
