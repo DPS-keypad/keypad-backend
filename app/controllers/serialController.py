@@ -1,4 +1,5 @@
 import serial
+import serial.tools.list_ports
 import threading
 
 from app.utils.constants import *
@@ -6,9 +7,15 @@ import app.controllers.actionController as actionController
 
 
 class SerialController:
-    def __init__(self, port=SERIAL_PORT, baudrate=BAUDRATE, bytesize=BYTESIZE, stopbit=STOPBITS, parity=PARITY,
+    def __init__(self, baudrate=BAUDRATE, bytesize=BYTESIZE, stopbit=STOPBITS, parity=PARITY,
                  timeout=TIMEOUT):
-        self.port = port
+
+        # Finds the correct port to listen to
+        ports = serial.tools.list_ports.comports()
+        for port in ports:
+            if port.description.startswith("STMicroelectronics"):
+                self.port = port.device
+
         self.baudrate = baudrate
         self.timeout = timeout
         self.bytesize = bytesize
@@ -21,13 +28,6 @@ class SerialController:
 
     def listen(self):
         # Starts the serial connection and listens for incoming data
-        """
-        try:
-            self.ser.open()
-        except serial.SerialException as e:
-            print(f"Error opening serial port: {e}")
-            return
-        """
 
         # Infinite loop to listen for incoming data
         print("Listening for incoming data...")

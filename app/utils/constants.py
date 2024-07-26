@@ -1,5 +1,4 @@
 # Serial constants
-SERIAL_PORT = 'COM3'
 BAUDRATE = 115200
 BYTESIZE = 8
 PARITY = 'N'
