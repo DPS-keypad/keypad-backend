@@ -33,6 +33,8 @@ def volume(volume_percentage):
 
     if volume_percentage < 0:
         volume_percentage = 0
+    elif volume_percentage > 100:
+        volume_percentage = 100
 
     # Calculate the volume value based on the percentage
     volume_value = int(VOLUME_MIN + (VOLUME_MAX - VOLUME_MIN) * (volume_percentage / 100.0))
