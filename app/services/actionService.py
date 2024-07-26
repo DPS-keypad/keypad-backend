@@ -75,12 +75,9 @@ class ActionService:
         This function will execute the action corresponding to the potentiometers values.
         """
         for index in range(3):
-            # The value is a character of 8 bits, so must be first converted into integer
-            # for example the character 'a' is 97 in ASCII, so the value is 97.
-            int_value = ord(values[index])
-            if int_value != self.pot_values[index] and action_strings[index]:
+            if values[index] != self.pot_values[index] and action_strings[index]:
                 # Update the value of the potentiometer
-                self.pot_values[index] = int_value
+                self.pot_values[index] = values[index]
                 # Execute the action
                 # The first part of the action_string is the API name, and the rest is the specific function to call in that API
                 api_string, function_string = action_strings[index].split('_')
@@ -89,5 +86,4 @@ class ActionService:
                 # get the function to call
                 function = getattr(api, function_string)
                 # call the function, execute the action
-                print(int_value)
-                function(int_value)
+                function(values[index])

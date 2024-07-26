@@ -17,7 +17,7 @@ def get_api_list():
 
 
 @app.route('/set_api', methods=['POST'])
-def data():
+def post_set_api():
     data = request.json
     key = data['key']
     action = data['action']
