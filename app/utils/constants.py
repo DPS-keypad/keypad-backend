@@ -50,3 +50,7 @@ VOLUME_MAX = 65535
 # Define constants for mouse control
 MOUSEEVENTF_WHEEL = 0x0800
 MOUSEEVENTF_HWHEEL = 0x01000
+
+
+# VS Code API
+VSCODE_PATH = r'C:\Users\Gledi\AppData\Local\Programs\Microsoft VS Code\Code.exe'  # Modifica questo percorso se necessario

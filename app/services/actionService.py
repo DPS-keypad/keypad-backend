@@ -13,6 +13,8 @@ class ActionService:
     def __init__(self):
         self.pot_values = [0, 0, 0]
 
+
+
     def execute_action_key(self, action_string):
         """
         This function will execute the action corresponding to the action_string string.
@@ -29,9 +31,16 @@ class ActionService:
             # get the access token
             access_token = 'YOUR_ACCESS_TOKEN'
             function(access_token)
+        elif api_string == "vscode":
+            # get the file path
+            file_path = r'C:\Users\Gledi\OneDrive - Politecnico di Bari\Desktop\ImageProcessing'
 
+            function(file_path)
         else:
             function()
+
+
+
 
     def get_action(self, key):
         """
