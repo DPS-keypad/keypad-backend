@@ -13,7 +13,6 @@ class ActionService:
     def __init__(self):
         self.pot_values = [0, 0, 0]
 
-
     def execute_action_key(self, action_string):
         """
         This function will execute the action corresponding to the action_string string.
@@ -22,12 +21,17 @@ class ActionService:
         api_string, function_string = action_string.split('_')
         # import the API file
         api = importlib.import_module(f'app.services.api.{api_string}_api')
+
         # get the function to call
         function = getattr(api, function_string)
         # call the function, execute the action
-        function()
+        if (api_string == "spotify"):
+            # get the access token
+            access_token = 'YOUR_ACCESS_TOKEN'
+            function(access_token)
 
-
+        else:
+            function()
 
     def get_action(self, key):
         """
@@ -56,8 +60,6 @@ class ActionService:
                 keyboard_actions[key] = action
                 with open(KEYBOARD_ACTIONS_LIST_PATH, 'w') as file:
                     file.write(json.dumps(keyboard_actions))
-
-
 
     def execute_action_pot(self, action_strings, values):
         """
