@@ -19,11 +19,10 @@ authorization_code = input('Enter the authorization code from the redirect URI: 
 # Fetch access token using the authorization code
 token = oauth.fetch_token('https://accounts.spotify.com/api/token', authorization_response=authorization_code, client_secret=client_secret)
 
-
 # Get the access token from the token response
 access_token = token['access_token']
 
-def get_authorization_url(client_id, redirect_uri):
+def get_authorization_url():
     """
     Get the authorization URL to direct the user for OAuth2 authentication.
     """
@@ -31,7 +30,7 @@ def get_authorization_url(client_id, redirect_uri):
     authorization_url, state = oauth.authorization_url(AUTH_URL)
     return authorization_url, state
 
-def fetch_access_token(client_id, client_secret, authorization_code, redirect_uri):
+def fetch_access_token(client_secret, authorization_code):
     """
     Fetch the access token using the authorization code.
     """
@@ -97,17 +96,6 @@ def previous(access_token):
     else:
         print('Failed to skip to previous track.')
 
-def set_volume(access_token, volume_percent):
-    """
-    Set the volume of the currently active device.
-    """
-    headers = {'Authorization': f'Bearer {access_token}'}
-    response = requests.put(f'{VOLUME_URL}?volume_percent={volume_percent}', headers=headers)
-    if response.status_code == 204:
-        print(f'Volume set to {volume_percent}%.')
-    else:
-        print('Failed to set volume.')
-
 def get_devices(access_token):
     """
     Get the list of available devices.
@@ -118,17 +106,5 @@ def get_devices(access_token):
         devices = response.json()['devices']
         return devices
     return []
-
-def playback(access_token, device_id):
-    """
-    Transfer playback to a different device.
-    """
-    headers = {'Authorization': f'Bearer {access_token}'}
-    data = {"device_ids": [device_id], "play": True}
-    response = requests.put(TRANSFER_PLAYBACK_URL, headers=headers, json=data)
-    if response.status_code == 204:
-        print('Playback transferred.')
-    else:
-        print('Failed to transfer playback.')
 
 
