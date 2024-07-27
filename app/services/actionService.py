@@ -23,18 +23,11 @@ class ActionService:
         api_string, function_string = action_string.split('_')
         # import the API file
         api = importlib.import_module(f'app.services.api.{api_string}_api')
-
         # get the function to call
         function = getattr(api, function_string)
-        # call the function, execute the action
-        if (api_string == "spotify"):
-            # get the access token
-            access_token = 'YOUR_ACCESS_TOKEN'
-            function(access_token)
-        elif api_string == "vscode":
+        if api_string == "vscode":
             # get the file path
             file_path = r'C:\Users\Gledi\OneDrive - Politecnico di Bari\Desktop\ImageProcessing'
-
             function(file_path)
         else:
             function()
