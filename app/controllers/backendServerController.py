@@ -90,7 +90,7 @@ def callback():
         set_refreshToken(token_info['refresh_token'])
         set_expires_at(datetime.now() + timedelta(seconds=token_info['expires_in']))  # The time in seconds until the access token expires
         print(datetime.now() + timedelta(seconds=token_info['expires_in']))
-        return redirect('/playlists')
+        return redirect('http://localhost:4200')
 
 
 
