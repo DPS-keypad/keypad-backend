@@ -15,7 +15,7 @@ def get_api_list():
     # Fetches the API list from the actionController
     print("Received GET request")
     api_list = actionController.get_action_list()
-    return jsonify({"data": api_list}), 200
+    return jsonify(api_list), 200
 
 
 @app.route('/set_api', methods=['POST'])

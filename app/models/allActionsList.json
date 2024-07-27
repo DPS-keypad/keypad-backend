@@ -1,6 +1,6 @@
 {
   "keys": {
-    "keyboard": [
+    "Keyboard": [
       {
         "id": "keyboard_cut",
         "description": "Cut",
@@ -17,7 +17,7 @@
         "key": "ctrl+v"
       }
     ],
-    "spotify": [
+    "Spotify": [
       {
         "id": "spotify_play",
         "description": "Play/Pause"
@@ -33,7 +33,7 @@
     ]
   },
   "pots": {
-    "system": [
+    "System": [
       {
         "id": "system_volume",
         "description": "Volume"
