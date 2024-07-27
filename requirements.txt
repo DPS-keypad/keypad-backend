@@ -1,5 +1,6 @@
 
 Flask
+flask_cors
 pyserial
 requests_oauthlib
 keyboard
