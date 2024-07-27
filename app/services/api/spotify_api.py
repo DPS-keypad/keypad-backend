@@ -131,3 +131,11 @@ def set_music(music_new):
     global music
     music = music_new
 """
+
+
+def song_has_changed():
+    return None
+
+
+def get_song():
+    return None
