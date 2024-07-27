@@ -30,6 +30,10 @@ DEBUG = True
 
 # SPOTIFY API
 # Constants for the Spotify API
+CLIENT_ID = 'c6e1a2e3479b4890bb1ee4e6a8d69cbe'
+CLIENT_SECRET = '7b56a32a5bbc4a9aac92559d1a88b49e'
+REDIRECT_URI = 'http://localhost:8000/callback'
+API_BASE_URL = 'https://api.spotify.com/v1/'
 AUTH_URL = 'https://accounts.spotify.com/authorize'
 TOKEN_URL = 'https://accounts.spotify.com/api/token'
 CURRENTLY_PLAYING_URL = 'https://api.spotify.com/v1/me/player/currently-playing'
@@ -41,6 +45,7 @@ VOLUME_URL = 'https://api.spotify.com/v1/me/player/volume'
 DEVICES_URL = 'https://api.spotify.com/v1/me/player/devices'
 SEARCH_URL = 'https://api.spotify.com/v1/search'
 TRANSFER_PLAYBACK_URL = 'https://api.spotify.com/v1/me/player'
+
 
 # SYSTEM API
 # Define constants for volume & mouse control

@@ -4,19 +4,13 @@ import app.controllers.actionController as actionController
 import urllib.parse
 from datetime import datetime, timedelta
 import requests
+from app.utils.constants import *
+
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "http://localhost:4200"}})
 
 app.secret_key = '53d355f8-571a-4590-a310-1f9579440851'
-
-
-CLIENT_ID = 'c6e1a2e3479b4890bb1ee4e6a8d69cbe'
-CLIENT_SECRET = '7b56a32a5bbc4a9aac92559d1a88b49e'
-REDIRECT_URI = 'http://localhost:8000/callback'
-AUTH_URL = 'https://accounts.spotify.com/authorize'
-TOKEN_URL = 'https://accounts.spotify.com/api/token'
-API_BASE_URL = 'https://api.spotify.com/v1/'
 
 
 @app.route('/', methods=['GET'])
@@ -28,7 +22,6 @@ def index():
 @app.route('/login', methods=['GET'])
 def login():
     scope = 'user-read-private user-read-email'
-
     params = {
         'client_id': CLIENT_ID,
         'response_type': 'code',
@@ -42,6 +35,11 @@ def login():
     return redirect(auth_url)
 
 
+
+
+
+
+# Quando l'utente completa l'autenticazione, il server di autenticazione (come Spotify) reindirizzerà l'utente a questo URI con le informazioni necessarie, come il codice di autorizzazione o il token di accesso.
 @app.route('/callback', methods=['GET'])
 def callback():
     if 'error' in request.args:
@@ -60,12 +58,11 @@ def callback():
         token_info = response.json()
 
         session['access_token'] = token_info['access_token']  # Use this token to make requests to the Spotify API
-        session['refresh_token'] = token_info[
-            'refresh_token']  # Save this token for future use when the access token expires
-        session['expires_at'] = datetime.now() + timedelta(
-            seconds=token_info['expires_in'])  # The time in seconds until the access token expires
-
+        session['refresh_token'] = token_info['refresh_token']  # Save this token for future use when the access token expires
+        session['expires_at'] = datetime.now() + timedelta(seconds=token_info['expires_in'])  # The time in seconds until the access token expires
         return redirect('/playlists')
+
+
 
 @app.route('/playlists', methods=['GET'])
 def get_playlists():
@@ -108,6 +105,8 @@ def refresh_token():
         seconds=new_token_info['expires_in'])  # The time in seconds until the access token expires
 
     return redirect('/playlists')
+
+
 
 
 
