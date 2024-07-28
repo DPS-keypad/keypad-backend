@@ -17,6 +17,81 @@
           "id": "keyboard_paste",
           "description": "Paste",
           "icon": "clipboard-outline"
+        },
+        {
+          "id": "keyboard_undo",
+          "description": "Undo",
+          "icon": "corner-up-left-outline"
+        },
+        {
+          "id": "keyboard_redo",
+          "description": "Redo",
+          "icon": "corner-up-right-outline"
+        },
+        {
+          "id": "keyboard_selectAll",
+          "description": "Select All",
+          "icon": "checkmark-square-2-outline"
+        },
+        {
+          "id": "keyboard_save",
+          "description": "Save",
+          "icon": "save-outline"
+        },
+        {
+          "id": "keyboard_closeWindow",
+          "description": "Close window",
+          "icon": "close-outline"
+        },
+        {
+          "id": "keyboard_screenshot",
+          "description": "Screenshot",
+          "icon": "camera-outline"
+        },
+        {
+          "id": "keyboard_number1",
+          "description": "Number 1",
+          "icon": "hash-outline"
+        },
+        {
+          "id": "keyboard_number2",
+          "description": "Number 2",
+          "icon": "hash-outline"
+        },
+        {
+          "id": "keyboard_number3",
+          "description": "Number 3",
+          "icon": "hash-outline"
+        },
+        {
+          "id": "keyboard_number4",
+          "description": "Number 4",
+          "icon": "hash-outline"
+        },
+        {
+          "id": "keyboard_number5",
+          "description": "Number 5",
+          "icon": "hash-outline"
+        },
+        {
+          "id": "keyboard_number6",
+          "description": "Number 6",
+          "icon": "hash-outline"
+        },
+        {
+          "id": "keyboard_number7",
+          "description": "Number 7",
+          "icon": "hash-outline"
+        },
+        {
+          "id": "keyboard_number8",
+          "description": "Number 8",
+          "icon": "hash-outline"
+        },
+        {
+          "id": "keyboard_number9",
+          "description": "Number 9",
+          "icon": "hash-outline"
         }
       ]
     },
@@ -47,15 +122,18 @@
       "actions": [
         {
           "id": "system_brightness",
-          "description": "Brightness"
+          "description": "Brightness",
+          "icon": "sun-outline"
         },
         {
           "id": "system_scrollX",
-          "description": "Scroll horizontally"
+          "description": "Scroll horizontally",
+          "icon": "arrow-forward-outline"
         },
         {
           "id": "system_scrollY",
-          "description": "Scroll vertically"
+          "description": "Scroll vertically",
+          "icon": "arrow-downward-outline"
         }
       ]
     }

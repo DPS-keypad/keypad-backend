@@ -24,7 +24,7 @@ def redo():
 
 
 # Select All
-def select_all():
+def selectAll():
     keyboard.press_and_release('ctrl+a')
 
 
@@ -34,22 +34,22 @@ def save():
 
 
 # Open a new file
-def open_file():
+def openFile():
     keyboard.press_and_release('ctrl+o')
 
 
 # Print
-def print_file():
+def printFile():
     keyboard.press_and_release('ctrl+p')
 
 
 # Close window
-def close_window():
+def closeWindow():
     keyboard.press_and_release('alt+f4')
 
 
 # Switching between applications
-def switch_window():
+def switchWindow():
     keyboard.press_and_release('alt+tab')
 
 
@@ -59,7 +59,7 @@ def screenshot():
 
 
 # Lock screen
-def lock_screen():
+def lockScreen():
     keyboard.press_and_release('win+l')
 
 
