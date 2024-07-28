@@ -1,9 +1,7 @@
-from requests_oauthlib import OAuth2Session
-from flask import jsonify, redirect, session
+from flask import jsonify, session
 import requests
 from app.utils.constants import *
 import app.controllers.backendServerController as backend
-from datetime import datetime, timedelta
 
 """
 # Set up your Spotify API credentials
@@ -11,11 +9,13 @@ client_id = 'ad7f25142d414884913dd1483e4d7f61'
 client_secret = 'efd29132685b43a38dae11cafff6a7a7'
 """
 
+# Global variable for the name of the song that is currently playing
+current_song = None
+# Global boolean variable to check if the song has changed
+changed_song = False
+
 
 def playlists():
-
-
-
     headers = {'Authorization': f'Bearer {backend.get_accessToken()}'}
     response = requests.get(f'{API_BASE_URL}me/playlists', headers=headers)
     playlists = response.json()  # This is a list of playlists
@@ -37,21 +37,16 @@ def get_currently_playing_track():
     return None, None
 
 
-
-
 def play():
     """
     Play the currently paused track.
     """
-    access_token = session['access_token']
     headers = {'Authorization': f'Bearer {backend.get_accessToken()}'}
     response = requests.put(PLAY_URL, headers=headers)
     if response.status_code == 204:
         print('Playback started.')
     else:
         print('Failed to start playback.')
-
-
 
 
 def pause():
@@ -66,7 +61,7 @@ def pause():
         print('Failed to pause playback.')
 
 
-def next(access_token):
+def next():
     """
     Skip to the next track.
     """
@@ -76,7 +71,7 @@ def next(access_token):
         print('Skipped to next track.')
     else:
         print('Failed to skip to next track.')
-
+    set_song(get_currently_playing_track())
 
 def previous():
     """
@@ -88,6 +83,7 @@ def previous():
         print('Skipped to previous track.')
     else:
         print('Failed to skip to previous track.')
+    set_song(get_currently_playing_track())
 
 
 def get_devices():
@@ -102,24 +98,20 @@ def get_devices():
     return []
 
 
-"""
-music = "Ciao"
-
-
-def get_music():
-    global music
-    return music
-
-
-def set_music(music_new):
-    global music
-    music = music_new
-"""
-
-
 def song_has_changed():
-    return None
+    global changed_song
+    return changed_song
 
 
 def get_song():
-    return None
+    global current_song
+    global changed_song
+    changed_song = False
+    return current_song
+
+
+def set_song(song):
+    global current_song
+    global changed_song
+    current_song = song
+    changed_song = True

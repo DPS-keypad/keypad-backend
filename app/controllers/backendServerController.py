@@ -1,36 +1,15 @@
 import app.controllers.actionController as actionController
 from app.utils.constants import *
-from app.services.api.spotify_api import get_currently_playing_track
+import app.services.api.spotify_api as spotify_api
 from datetime import datetime, timedelta
 from flask_cors import CORS
 from flask import Flask, jsonify, request, redirect, session
-import urllib.parse
 import requests
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "http://localhost:4200"}})
+
 app.secret_key = '53d355f8-571a-4590-a310-1f9579440851'  # This is a secret key used to sign the session cookies
-
-""" 
-@app.route('/', methods=['GET'])
-def index():
-    return "Welcome to my Spotify APP <br> <a href='/login'>Login with Spotify</a>"
-
-@app.route('/login', methods=['GET'])
-def login():
-    scope = 'user-read-private user-read-email'
-    params = {
-        'client_id': CLIENT_ID,
-        'response_type': 'code',
-        'scope': scope,
-        'redirect_uri': REDIRECT_URI,
-        'show_dialog': True
-    }
-
-    auth_url = f'{AUTH_URL}?{urllib.parse.urlencode(params)}'
-
-    return redirect(auth_url)
-"""
 access_token = ""
 refresh_token = ""
 expires_at = ""
@@ -90,6 +69,8 @@ def callback():
             set_expires_at(datetime.now() + timedelta(
                 seconds=token_info['expires_in']))  # The time in seconds until the access token expires
             print(datetime.now() + timedelta(seconds=token_info['expires_in']))
+            current_song = spotify_api.get_currently_playing_track()
+            spotify_api.set_song(current_song)
 
             return redirect(f'http://localhost:4200?auth_status=success')
 
