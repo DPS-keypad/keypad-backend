@@ -13,6 +13,8 @@ class ActionService:
     def __init__(self):
         self.pot_values = [0, 0, 0]
 
+
+
     def execute_action_key(self, action_string):
         """
         This function will execute the action corresponding to the action_string string.
@@ -21,17 +23,17 @@ class ActionService:
         api_string, function_string = action_string.split('_')
         # import the API file
         api = importlib.import_module(f'app.services.api.{api_string}_api')
-
         # get the function to call
         function = getattr(api, function_string)
-        # call the function, execute the action
-        if (api_string == "spotify"):
-            # get the access token
-            access_token = 'YOUR_ACCESS_TOKEN'
-            function(access_token)
-
+        if api_string == "vscode":
+            # get the file path
+            file_path = r'C:\Users\Gledi\OneDrive - Politecnico di Bari\Desktop\ImageProcessing'
+            function(file_path)
         else:
             function()
+
+
+
 
     def get_action(self, key):
         """
@@ -66,12 +68,9 @@ class ActionService:
         This function will execute the action corresponding to the potentiometers values.
         """
         for index in range(3):
-            # The value is a character of 8 bits, so must be first converted into integer
-            # for example the character 'a' is 97 in ASCII, so the value is 97.
-            int_value = ord(values[index])
-            if int_value != self.pot_values[index] and action_strings[index]:
+            if values[index] != self.pot_values[index] and action_strings[index]:
                 # Update the value of the potentiometer
-                self.pot_values[index] = int_value
+                self.pot_values[index] = values[index]
                 # Execute the action
                 # The first part of the action_string is the API name, and the rest is the specific function to call in that API
                 api_string, function_string = action_strings[index].split('_')
@@ -80,5 +79,4 @@ class ActionService:
                 # get the function to call
                 function = getattr(api, function_string)
                 # call the function, execute the action
-                print(int_value)
-                function(int_value)
+                function(values[index])

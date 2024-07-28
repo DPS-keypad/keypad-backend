@@ -1,47 +1,63 @@
 {
-  "keys": {
-    "keyboard": [
-      {
-        "id": "keyboard_cut",
-        "description": "Cut",
-        "key": "ctrl+x"
-      },
-      {
-        "id": "keyboard_copy",
-        "description": "Copy",
-        "key": "ctrl+c"
-      },
-      {
-        "id": "keyboard_paste",
-        "description": "Paste",
-        "key": "ctrl+v"
-      }
-    ],
-    "spotify": [
-      {
-        "id": "spotify_play",
-        "description": "Play/Pause"
-      },
-      {
-        "id": "spotify_next",
-        "description": "Next"
-      },
-      {
-        "id": "spotify_previous",
-        "description": "Previous"
-      }
-    ]
-  },
-  "pots": {
-    "system": [
-      {
-        "id": "system_volume",
-        "description": "Volume"
-      },
-      {
-        "id": "system_brightness",
-        "description": "Brightness"
-      }
-    ]
-  }
+  "keys": [
+    {
+      "api_name": "Keyboard",
+      "actions": [
+        {
+          "id": "keyboard_cut",
+          "description": "Cut",
+          "icon": "scissors-outline"
+        },
+        {
+          "id": "keyboard_copy",
+          "description": "Copy",
+          "icon": "copy-outline"
+        },
+        {
+          "id": "keyboard_paste",
+          "description": "Paste",
+          "icon": "clipboard-outline"
+        }
+      ]
+    },
+    {
+      "api_name": "Spotify",
+      "actions": [
+        {
+          "id": "spotify_play",
+          "description": "Play/Pause",
+          "icon": "play-circle-outline"
+        },
+        {
+          "id": "spotify_next",
+          "description": "Next",
+          "icon": "rewind-right-outline"
+        },
+        {
+          "id": "spotify_previous",
+          "description": "Previous",
+          "icon": "rewind-left-outline"
+        }
+      ]
+    }
+  ],
+  "pots": [
+    {
+      "api_name": "System",
+      "actions": [
+        {
+          "id": "system_brightness",
+          "description": "Brightness"
+        },
+        {
+          "id": "system_scrollX",
+          "description": "Scroll horizontally"
+        },
+        {
+          "id": "system_scrollY",
+          "description": "Scroll vertically"
+        }
+      ]
+    }
+  ]
 }

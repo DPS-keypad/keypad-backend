@@ -30,6 +30,10 @@ DEBUG = True
 
 # SPOTIFY API
 # Constants for the Spotify API
+CLIENT_ID = 'd68f5af7ddd941369a760d7e4f958033'
+CLIENT_SECRET = 'dde2215cabdd42f2abe3f52256ef4d52'
+REDIRECT_URI = 'http://localhost:8000/callback'
+API_BASE_URL = 'https://api.spotify.com/v1/'
 AUTH_URL = 'https://accounts.spotify.com/authorize'
 TOKEN_URL = 'https://accounts.spotify.com/api/token'
 CURRENTLY_PLAYING_URL = 'https://api.spotify.com/v1/me/player/currently-playing'
@@ -42,6 +46,7 @@ DEVICES_URL = 'https://api.spotify.com/v1/me/player/devices'
 SEARCH_URL = 'https://api.spotify.com/v1/search'
 TRANSFER_PLAYBACK_URL = 'https://api.spotify.com/v1/me/player'
 
+
 # SYSTEM API
 # Define constants for volume & mouse control
 VOLUME_MIN = 0
@@ -50,3 +55,7 @@ VOLUME_MAX = 65535
 # Define constants for mouse control
 MOUSEEVENTF_WHEEL = 0x0800
 MOUSEEVENTF_HWHEEL = 0x01000
+
+
+# VS Code API
+VSCODE_PATH = r'C:\Users\Gledi\AppData\Local\Programs\Microsoft VS Code\Code.exe'  # Modifica questo percorso se necessario
