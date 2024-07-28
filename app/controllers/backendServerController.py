@@ -7,8 +7,6 @@ from flask import Flask, jsonify, request, redirect, session
 import urllib.parse
 import requests
 
-
-
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "http://localhost:4200"}})
 app.secret_key = '53d355f8-571a-4590-a310-1f9579440851'  # This is a secret key used to sign the session cookies
@@ -72,9 +70,9 @@ def set_expires_at(expires_at_new):
 @app.route('/callback', methods=['GET'])
 def callback():
     if 'error' in request.args:
-        return jsonify({"error": request.args['error']}), 400
+        return redirect(f'http://localhost:4200?auth_status=error&error={request.args["error"]}')
 
-    if 'code' in request.args:
+    elif 'code' in request.args:
         req_body = {
             'code': request.args['code'],
             'grant_type': 'authorization_code',
@@ -84,14 +82,19 @@ def callback():
         }
 
         response = requests.post(TOKEN_URL, data=req_body)
+        print(response.json())
         token_info = response.json()
+        try:
+            set_accessToken(token_info['access_token'])
+            set_refreshToken(token_info['refresh_token'])
+            set_expires_at(datetime.now() + timedelta(
+                seconds=token_info['expires_in']))  # The time in seconds until the access token expires
+            print(datetime.now() + timedelta(seconds=token_info['expires_in']))
 
-        set_accessToken(token_info['access_token'])
-        set_refreshToken(token_info['refresh_token'])
-        set_expires_at(datetime.now() + timedelta(seconds=token_info['expires_in']))  # The time in seconds until the access token expires
-        print(datetime.now() + timedelta(seconds=token_info['expires_in']))
-        return redirect('http://localhost:4200')
+            return redirect(f'http://localhost:4200?auth_status=success')
 
+        except KeyError:
+            return redirect(f'http://localhost:4200?auth_status=error&error={token_info["error_description"]}')
 
 
 @app.route('/playlists', methods=['GET'])
@@ -128,7 +131,8 @@ def refresh_token():
     session['access_token'] = token_info['access_token']
     new_token_info = response.json()
     session['access_token'] = new_token_info['access_token']
-    session['expires_at'] = datetime.now() + timedelta(seconds=new_token_info['expires_in'])  # The time in seconds until the access token expires
+    session['expires_at'] = datetime.now() + timedelta(
+        seconds=new_token_info['expires_in'])  # The time in seconds until the access token expires
 
     return redirect('/playlists')
 

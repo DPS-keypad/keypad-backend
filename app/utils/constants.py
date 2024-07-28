@@ -30,8 +30,8 @@ DEBUG = True
 
 # SPOTIFY API
 # Constants for the Spotify API
-CLIENT_ID = 'c6e1a2e3479b4890bb1ee4e6a8d69cbe'
-CLIENT_SECRET = '7b56a32a5bbc4a9aac92559d1a88b49e'
+CLIENT_ID = 'd68f5af7ddd941369a760d7e4f958033'
+CLIENT_SECRET = 'dde2215cabdd42f2abe3f52256ef4d52'
 REDIRECT_URI = 'http://localhost:8000/callback'
 API_BASE_URL = 'https://api.spotify.com/v1/'
 AUTH_URL = 'https://accounts.spotify.com/authorize'
