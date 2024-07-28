@@ -22,7 +22,7 @@ POT3 = 'l'
 """
 
 # paths
-KEYBOARD_ACTIONS_LIST_PATH = 'app/models/keyboardActionsList.json'
+KEYPAD_ACTIONS_LIST_PATH = 'app/models/keypadActionsList.json'
 ALL_ACTIONS_LIST_PATH = 'app/models/allActionsList.json'
 
 SECRET_KEY = 'your_secret_key'

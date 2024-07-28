@@ -13,8 +13,6 @@ class ActionService:
     def __init__(self):
         self.pot_values = [0, 0, 0]
 
-
-
     def execute_action_key(self, action_string):
         """
         This function will execute the action corresponding to the action_string string.
@@ -32,15 +30,12 @@ class ActionService:
         else:
             function()
 
-
-
-
     def get_action(self, key):
         """
         This function will return the action corresponding to the key pressed on the keypad.
         """
         with file_lock:
-            keyboard_actions = json.load(open(KEYBOARD_ACTIONS_LIST_PATH))
+            keyboard_actions = json.load(open(KEYPAD_ACTIONS_LIST_PATH))
             if key in keyboard_actions:
                 return keyboard_actions[key]
             return None
@@ -57,10 +52,10 @@ class ActionService:
         This function will set the action corresponding to the key pressed on the keypad
         """
         with file_lock:
-            keyboard_actions = json.load(open(KEYBOARD_ACTIONS_LIST_PATH))
+            keyboard_actions = json.load(open(KEYPAD_ACTIONS_LIST_PATH))
             if key in keyboard_actions:
                 keyboard_actions[key] = action
-                with open(KEYBOARD_ACTIONS_LIST_PATH, 'w') as file:
+                with open(KEYPAD_ACTIONS_LIST_PATH, 'w') as file:
                     file.write(json.dumps(keyboard_actions))
 
     def execute_action_pot(self, action_strings, values):
