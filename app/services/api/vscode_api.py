@@ -14,6 +14,7 @@ def find_vscode_path():
     return None
 """
 
+
 def find_vscode_path():
     """
     Find the path of the Visual Studio Code executable.
@@ -28,8 +29,6 @@ def find_vscode_path():
     for path in common_paths:
         if os.path.exists(path):
             return path
-
-
 
 
 def start(file_path):
@@ -55,12 +54,6 @@ def start(file_path):
         print("VS Code path not found")
 
 
-
-
-
-
-
-
 def startDebug(file_path):
     """
     Start debugging in VS Code with the specified file.
@@ -79,7 +72,6 @@ def startDebug(file_path):
         print(f"Visual Studio Code not found: {e}")
     except Exception as e:
         print(f"An error occurred: {e}")
-
 
 
 def stopDebug(file_path):
@@ -119,7 +111,6 @@ def status(file_path):
         print(f"Visual Studio Code not found: {e}")
     except Exception as e:
         print(f"An error occurred: {e}")
-
 
 
 def performance(file_path):

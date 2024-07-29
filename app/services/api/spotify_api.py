@@ -15,13 +15,6 @@ current_song = None
 changed_song = False
 
 
-def playlists():
-    headers = {'Authorization': f'Bearer {backend.get_accessToken()}'}
-    response = requests.get(f'{API_BASE_URL}me/playlists', headers=headers)
-    playlists = response.json()  # This is a list of playlists
-    return jsonify(playlists)
-
-
 def get_currently_playing_track():
     """
     Get the currently playing track from the Spotify API.
@@ -73,6 +66,7 @@ def next():
         print('Failed to skip to next track.')
     set_song(get_currently_playing_track())
 
+
 def previous():
     """
     Skip to the previous track.
@@ -84,18 +78,6 @@ def previous():
     else:
         print('Failed to skip to previous track.')
     set_song(get_currently_playing_track())
-
-
-def get_devices():
-    """
-    Get the list of available devices.
-    """
-    headers = {'Authorization': f'Bearer {backend.get_accessToken()}'}
-    response = requests.get(DEVICES_URL, headers=headers)
-    if response.status_code == 200:
-        devices = response.json()['devices']
-        return devices
-    return []
 
 
 def song_has_changed():

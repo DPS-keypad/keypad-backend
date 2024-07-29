@@ -5,3 +5,4 @@ pyserial
 requests_oauthlib
 keyboard
 requests
+threading

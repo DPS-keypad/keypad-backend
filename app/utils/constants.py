@@ -5,28 +5,9 @@ PARITY = 'N'
 STOPBITS = 1
 TIMEOUT = 1
 
-"""
-# Keyboard constants
-KEY1 = 'a'
-KEY2 = 'b'
-KEY3 = 'c'
-KEY4 = 'd'
-KEY5 = 'e'
-KEY6 = 'f'
-KEY7 = 'g'
-KEY8 = 'h'
-KEY9 = 'i'
-POT1 = 'j'
-POT2 = 'k'
-POT3 = 'l'
-"""
-
 # paths
 KEYPAD_ACTIONS_LIST_PATH = 'app/models/keypadActionsList.json'
 ALL_ACTIONS_LIST_PATH = 'app/models/allActionsList.json'
-
-SECRET_KEY = 'your_secret_key'
-DEBUG = True
 
 # SPOTIFY API
 # Constants for the Spotify API
