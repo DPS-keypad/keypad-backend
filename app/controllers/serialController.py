@@ -50,6 +50,8 @@ class SerialController:
     def listen(self):
         # Infinite loop to listen for incoming data
         print("Listening for incoming data...")
+        # check if the serial port is still open and reconnect if necessary
+        # (caso in cui il keypad viene staccato durante l'esecuzione)
         while True:
             if self.has_received():
                 received_string = self.read_string()
@@ -59,24 +61,30 @@ class SerialController:
             # Check if the spotify song has changed: if so, send it through the serial
             if spotify_api.song_has_changed():
                 new_song = spotify_api.get_song()
-                self.send_song(new_song)
-
-            # check if the serial port is still open and reconnect if necessary
-            # (caso in cui il keypad viene staccato durante l'esecuzione)
-            if not self.ser.is_open:
-                self.__init__()
-                self.listen()
+                print(f"New song: {new_song}")
+                try:
+                    self.send_song(new_song)
+                except:
+                    pass
 
     def read_string(self):
         # Reads a string from the serial port
         # Reads until a newline character is encountered or until 40 characters are read
-        return self.ser.read(5)
+        try:
+            return self.ser.read(5)
+        except serial.SerialException:
+            pass
 
     def has_received(self):
         # Check if there is data available to read
-        return self.ser.in_waiting > 0
+        try:
+            return self.ser.in_waiting > 0
+        except serial.SerialException:
+            print("Serial port closed, reconnecting...")
+            return False
 
     def send_song(self, new_song):
+
         # The string to send must be long 44 characters: the first 22 are the song name, the last 22 the artist
         # The object song is an array with 2 elements: the song name and the song artist
         # If the song name or the artist are longer than 22 characters, only the first 22 characters are sent,

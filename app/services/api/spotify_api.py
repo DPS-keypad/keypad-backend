@@ -1,3 +1,5 @@
+import time
+
 from flask import jsonify, session
 import requests
 from app.utils.constants import *
@@ -21,7 +23,7 @@ def get_currently_playing_track():
     """
     headers = {'Authorization': f'Bearer {backend.get_accessToken()}'}
     response = requests.get(CURRENTLY_PLAYING_URL, headers=headers)
-    print(f'Response status code: {response.status_code}')  # Debug print statement
+    print(f'Response status code: {response.status_code}')
     if response.status_code == 200:
         track_data = response.json()
         track_name = track_data['item']['name']
@@ -36,6 +38,7 @@ def play():
     """
     headers = {'Authorization': f'Bearer {backend.get_accessToken()}'}
     response = requests.put(PLAY_URL, headers=headers)
+    print(response.json())
     if response.status_code == 204:
         print('Playback started.')
     else:
@@ -48,6 +51,7 @@ def pause():
     """
     headers = {'Authorization': f'Bearer {backend.get_accessToken()}'}
     response = requests.put(PAUSE_URL, headers=headers)
+    print(response.json())
     if response.status_code == 204:
         print('Playback paused.')
     else:
@@ -60,10 +64,14 @@ def next():
     """
     headers = {'Authorization': f'Bearer {backend.get_accessToken()}'}
     response = requests.post(NEXT_TRACK_URL, headers=headers)
-    if response.status_code == 204:
+    print(f'Response status code: {response.status_code}')
+    if response.status_code == 200:
         print('Skipped to next track.')
     else:
         print('Failed to skip to next track.')
+    tick = time.time()
+    while time.time() - tick < 1:
+        pass
     set_song(get_currently_playing_track())
 
 

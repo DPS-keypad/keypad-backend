@@ -1,3 +1,4 @@
+import json
 import app.controllers.actionController as actionController
 from app.utils.constants import *
 import app.services.api.spotify_api as spotify_api
@@ -5,44 +6,60 @@ from datetime import datetime, timedelta
 from flask_cors import CORS
 from flask import Flask, jsonify, request, redirect, session
 import requests
+import threading
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "http://localhost:4200"}})
 
 app.secret_key = '53d355f8-571a-4590-a310-1f9579440851'  # This is a secret key used to sign the session cookies
-access_token = ""
-refresh_token = ""
-expires_at = ""
+file_lock = threading.Lock()
 
 
 def get_accessToken():
-    global access_token
-    return access_token
+    with open('app/utils/spotify.json', 'r') as file:
+        data = json.load(file)
+    return data['access_token']
 
 
 def set_accessToken(access_token_new):
-    global access_token
-    access_token = access_token_new
+    # writes the access_token constant in the constants.py file
+    with file_lock:
+        with open('app/utils/spotify.json', 'r') as file:
+            data = json.load(file)
+            print(data)
+            data['access_token'] = access_token_new
+            with open('app/utils/spotify.json', 'w') as file:
+                json.dump(data, file)
 
 
 def get_refreshToken():
-    global refresh_token
-    return refresh_token
+    with open('app/utils/spotify.json', 'r') as file:
+        data = json.load(file)
+        return data['refresh_token']
 
 
 def set_refreshToken(refresh_token_new):
-    global refresh_token
-    refresh_token = refresh_token_new
+    with file_lock:
+        with open('app/utils/spotify.json', 'r') as file:
+            data = json.load(file)
+            data['refresh_token'] = refresh_token_new
+            with open('app/utils/spotify.json', 'w') as file:
+                json.dump(data, file)
 
 
 def get_expires_at():
-    global expires_at
-    return expires_at
+    with open('app/utils/spotify.json', 'r') as file:
+        data = json.load(file)
+        return data['expires_at']
 
 
 def set_expires_at(expires_at_new):
-    global expires_at
-    expires_at = expires_at_new
+    with file_lock:
+        with open('app/utils/spotify.json', 'r') as file:
+            data = json.load(file)
+            data['expires_at'] = str(expires_at_new)
+            with open('app/utils/spotify.json', 'w') as file:
+                json.dump(data, file)
 
 
 # Quando l'utente completa l'autenticazione, il server di autenticazione (come Spotify) reindirizzerà l'utente a questo URI con le informazioni necessarie, come il codice di autorizzazione o il token di accesso.
@@ -61,7 +78,6 @@ def callback():
         }
 
         response = requests.post(TOKEN_URL, data=req_body)
-        print(response.json())
         token_info = response.json()
         try:
             set_accessToken(token_info['access_token'])
@@ -142,4 +158,4 @@ def post_set_api():
 
 
 def listen():
-    app.run(host='0.0.0.0', port=8000, debug=True)
+    app.run(host='0.0.0.0', port=8000)
