@@ -114,6 +114,46 @@
           "icon": "rewind-left-outline"
         }
       ]
+    },
+    {
+      "api_name": "Visual Studio Code",
+      "actions": [
+        {
+          "id": "vscode_run",
+          "description": "Run",
+          "icon": "play-circle-outline"
+        },
+        {
+          "id": "vscode_debug",
+          "description": "Debug / Continue during debugging",
+          "icon": "sun-outline"
+        },
+        {
+          "id": "vscode_stop",
+          "description": "Stop",
+          "icon": "stop-circle-outline"
+        },
+        {
+          "id": "vscode_newTerminal",
+          "description": "New terminal",
+          "icon": "browser-outline"
+        },
+        {
+          "id": "vscode_stepOver",
+          "description": "Step over",
+          "icon": "diagonal-arrow-right-down-outline"
+        },
+        {
+          "id": "vscode_stepInto",
+          "description": "Step into",
+          "icon": "download-outline"
+        },
+        {
+          "id": "vscode_stepOut",
+          "description": "Step out",
+          "icon": "upload-outline"
+        }
+      ]
     }
   ],
   "pots": [

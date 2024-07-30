@@ -26,7 +26,7 @@ def execute_action(received_string):
     elif received_string[0] == 107:  # chr(107) = 'k'
         received_string = received_string[:-1].decode()
         action_string = actionService.get_action(received_string)
-        print(f"Action for key {received_string[:-1]}: {action_string}")
+        print(f"Action for key {received_string[-1]}: {action_string}")
         # Execute the action
         if action_string:
             actionService.execute_action_key(action_string)

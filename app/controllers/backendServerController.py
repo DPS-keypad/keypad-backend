@@ -94,21 +94,6 @@ def callback():
             return redirect(f'http://localhost:4200?auth_status=error&error={token_info["error_description"]}')
 
 
-@app.route('/playlists', methods=['GET'])
-def get_playlists():
-    if 'access_token' not in session:
-        return redirect('/spotify/login')
-
-    if datetime.now() > session['expires_at'].replace(tzinfo=None):
-        return redirect('/refresh_token')
-
-    headers = {'Authorization': f'Bearer {session["access_token"]}'}
-    response = requests.get(f'{API_BASE_URL}me/playlists', headers=headers)
-    playlists = response.json()  # This is a list of playlists
-
-    return jsonify(playlists)
-
-
 @app.route('/refresh_token', methods=['GET'])
 def refresh_token():
     if 'refresh_token' not in session:

@@ -1,3 +1,5 @@
+import time
+
 import serial
 import serial.tools.list_ports
 import threading
@@ -50,8 +52,7 @@ class SerialController:
     def listen(self):
         # Infinite loop to listen for incoming data
         print("Listening for incoming data...")
-        # check if the serial port is still open and reconnect if necessary
-        # (caso in cui il keypad viene staccato durante l'esecuzione)
+        tick = time.time()
         while True:
             if self.has_received():
                 received_string = self.read_string()
@@ -59,13 +60,23 @@ class SerialController:
                 threading.Thread(target=actionController.execute_action, args=(received_string,), daemon=True).start()
 
             # Check if the spotify song has changed: if so, send it through the serial
+            if time.time() - tick > 1:
+                threading.Thread(target=self.update_song, daemon=True).start()
+                tick = time.time()
+
             if spotify_api.song_has_changed():
-                new_song = spotify_api.get_song()
-                print(f"New song: {new_song}")
+                new_song = spotify_api.get_song_string()
+                new_artist = spotify_api.get_song()[1]
                 try:
-                    self.send_song(new_song)
+                    self.send_song((new_song, new_artist))
                 except:
                     pass
+
+            if not self.connected():
+                print("Device not connected, waiting for reconnection...")
+                self.__init__()
+                threading.Thread(target=self.listen()).start()
+                break
 
     def read_string(self):
         # Reads a string from the serial port
@@ -80,8 +91,32 @@ class SerialController:
         try:
             return self.ser.in_waiting > 0
         except serial.SerialException:
-            print("Serial port closed, reconnecting...")
             return False
+
+    def connected(self):
+        # Check if the device is still connected
+        ports = serial.tools.list_ports.comports()
+        for port in ports:
+            if port.description.startswith("USB"):
+                return True
+        return False
+
+    def reconnect(self):
+        # Reconnect to the serial port
+        self.ser.close()
+        self.__init__()
+
+    def update_song(self):
+        # Update the current playing song
+        old_song = spotify_api.get_song()
+        new_song = spotify_api.get_currently_playing_track()
+
+        if new_song != (None, None):
+            if old_song == (new_song[0] + "    ", new_song[1]) and len(old_song[0]) > 21:
+                string = spotify_api.get_song_string()
+                spotify_api.set_song_string(string[1:] + string[0])
+            else:
+                spotify_api.set_song((new_song[0] + "    ", new_song[1]))
 
     def send_song(self, new_song):
 

@@ -63,6 +63,7 @@ class ActionService:
         This function will execute the action corresponding to the potentiometers values.
         """
         for index in range(3):
+            # Update values only for intervals greater than 5
             if abs(values[index] - self.pot_values[index]) > 5 and action_strings[index]:
                 # Update the value of the potentiometer
                 self.pot_values[index] = values[index]

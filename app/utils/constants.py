@@ -25,7 +25,7 @@ PREVIOUS_TRACK_URL = 'https://api.spotify.com/v1/me/player/previous'
 VOLUME_URL = 'https://api.spotify.com/v1/me/player/volume'
 DEVICES_URL = 'https://api.spotify.com/v1/me/player/devices'
 SEARCH_URL = 'https://api.spotify.com/v1/search'
-TRANSFER_PLAYBACK_URL = 'https://api.spotify.com/v1/me/player'
+GET_PLAYBACK_URL = 'https://api.spotify.com/v1/me/player'
 
 
 # SYSTEM API
@@ -36,7 +36,3 @@ VOLUME_MAX = 65535
 # Define constants for mouse control
 MOUSEEVENTF_WHEEL = 0x0800
 MOUSEEVENTF_HWHEEL = 0x01000
-
-
-# VS Code API
-VSCODE_PATH = r'C:\Users\Gledi\AppData\Local\Programs\Microsoft VS Code\Code.exe'  # Modifica questo percorso se necessario

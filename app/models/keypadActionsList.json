@@ -1,14 +1,1 @@
-{
-  "key1": "spotify_next",
-  "key2": "spotify_play",
-  "key3": "spotify_previous",
-  "key4": "keyboard_cut",
-  "key5": "keyboard_copy",
-  "key6": "keyboard_paste",
-  "key7": "keyboard_cut",
-  "key8": "keyboard_copy",
-  "key9": "keyboard_paste",
-  "pot1": "system_brightness",
-  "pot2": "system_scrollY",
-  "pot3": null
-}
+{"key1": "spotify_previous", "key2": "spotify_play", "key3": "spotify_next", "key4": "keyboard_cut", "key5": "keyboard_copy", "key6": "keyboard_paste", "key7": "keyboard_cut", "key8": "keyboard_copy", "key9": "keyboard_paste", "pot1": "system_brightness", "pot2": "system_scrollY", "pot3": null}
